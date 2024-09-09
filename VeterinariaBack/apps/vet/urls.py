@@ -5,6 +5,8 @@ from apps.vet.api_views.receta_views import RecetaView
 from apps.vet.api_views.exams_views import ExamsView
 from apps.vet.api_views.consults_views import ConsultView
 from apps.vet.api_views.diagnoses_views import DiagnosesView
+from apps.vet.api_views.treatments_views import TreatmentsView
+from apps.vet.api_views.product_treatments_views import Product_TreatmentsView
 
 urlpatterns = [
     # Cliente
@@ -18,5 +20,9 @@ urlpatterns = [
     # Consultas
     path("consultas/<int:pk>", ConsultView.as_view(), name="consults_view"),
     # Diagnosticos
-    path("diagnosticos/<int:pk>", DiagnosesView.as_view(), name="diagnoses_view")
+    path("diagnosticos/<int:pk>", DiagnosesView.as_view(), name="diagnoses_view"),
+    # Trtamiento
+    path("tratamientos/<int:pk>", TreatmentsView.as_view(), name="tratamientos_view"),
+    # Products Tratamientos
+    path("products_tratamientos/<int:pk>", Product_TreatmentsView.as_view(), name="products_tratamientos_view")
 ]
