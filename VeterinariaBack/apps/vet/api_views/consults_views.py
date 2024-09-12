@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.db.models import Q
+import datetime
 
 from apps.vet.models.consults_model import Consults
 from apps.vet.serializers.consults_serializers import ConsultsSerializer
@@ -21,3 +22,20 @@ class ConsultView(APIView):
             print(tb)
             return Response({"SERVER ERROR"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)       
             
+class ConsultDateView(APIView):
+    def get(self,request,pk):
+        try:
+            fecha_actual=datetime.date.today()            
+            consulta_fechas = Consults.objects.filter(patient=pk,next_consult__gte=fecha_actual)
+            if consulta_fechas:
+                return Response(ConsultsSerializer(consulta_fechas,many=True).data,status=status.HTTP_200_OK)
+            return Response({"mensaje": "No existen consultas"}, status=status.HTTP_404_NOT_FOUND)       
+        except:
+            tb = traceback.format_exc()
+            print(tb)
+            return Response({"SERVER ERROR"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)     
+
+
+        
+
+    

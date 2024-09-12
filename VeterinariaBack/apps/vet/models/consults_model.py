@@ -3,13 +3,13 @@ from apps.vet.models.patient_model import Patient
 
 class Consults(models.Model):
     id = models.AutoField("IdConsults", primary_key=True, db_column="id")
-    consult_date=models.DateField("a",null=False)
+    consult_date=models.DateField("consult_dat" ,null=False)
     reason = models.CharField("reason",max_length=255,null=False)
-    antecedents = models.CharField("reason",max_length=255,null=True)
-    diseases = models.CharField("reason",max_length=255,null=True)
-    next_consult = models.DateField("reason",max_length=255,null=True)
+    antecedents = models.CharField("antecedents",max_length=255,null=True)
+    diseases = models.CharField("diseases",max_length=255,null=True)
+    next_consult = models.DateField("next_consult",max_length=255,null=True)
     patient = models.ForeignKey(Patient,models.DO_NOTHING,db_column='patient_id',null=False)
-    status = models.IntegerField("reason",null=True)
+    status = models.IntegerField("status",null=True)
 
 
     class Meta:
